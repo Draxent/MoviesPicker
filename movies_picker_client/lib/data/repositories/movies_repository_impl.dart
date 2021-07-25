@@ -7,7 +7,10 @@ import '../api/movies_api.dart';
 import '../api/movies_api_impl.dart';
 
 import '../models/data_error.dart';
+import '../models/language.dart';
+import '../models/location.dart';
 import '../models/movie_detail.dart';
+import '../models/movie_poster.dart';
 
 import './movies_repository.dart';
 
@@ -17,6 +20,33 @@ class MoviesRepositoryImpl implements MoviesRepository {
   final MoviesApi _moviesApi;
 
   static final instance = MoviesRepositoryImpl(MoviesApiImpl.instance);
+
+  @override
+  Future<List<MoviePoster>> getMovies({
+    String? title,
+    Language? language,
+    Location? location,
+  }) async {
+    final response = await _moviesApi.getMovies(
+        title: title, language: language, location: location);
+    if (response.statusCode != SharedConsts.responseOk) {
+      throw _cannotGetMovies(title, language, location);
+    }
+    try {
+      final List<dynamic> moviesRaw = json.decode(response.body);
+      return moviesRaw
+          .map((x) => MoviePoster.fromResponseData(x))
+          .toList(growable: false);
+    } catch (e, s) {
+      logger.e('Error: $e, Stack: $s');
+      throw _cannotGetMovies(title, language, location);
+    }
+  }
+
+  DataError _cannotGetMovies(
+          String? title, Language? language, Location? location) =>
+      DataError(
+          '''cannot get movies searching for title: $title, language: $language, location: $location''');
 
   @override
   Future<MovieDetail> getMovieDetails(int movieId) async {

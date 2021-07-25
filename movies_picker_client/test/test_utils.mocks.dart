@@ -7,6 +7,8 @@ import 'dart:async' as _i4;
 import 'package:http/http.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:movies_picker_client/data/api/movies_api.dart' as _i3;
+import 'package:movies_picker_client/data/models/language.dart' as _i5;
+import 'package:movies_picker_client/data/models/location.dart' as _i6;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -26,6 +28,14 @@ class MockMoviesApi extends _i1.Mock implements _i3.MoviesApi {
     _i1.throwOnMissingStub(this);
   }
 
+  @override
+  _i4.Future<_i2.Response> getMovies(
+          {String? title, _i5.Language? language, _i6.Location? location}) =>
+      (super.noSuchMethod(
+              Invocation.method(#getMovies, [],
+                  {#title: title, #language: language, #location: location}),
+              returnValue: Future<_i2.Response>.value(_FakeResponse()))
+          as _i4.Future<_i2.Response>);
   @override
   _i4.Future<_i2.Response> getMovieDetails(int? movieId) =>
       (super.noSuchMethod(Invocation.method(#getMovieDetails, [movieId]),
