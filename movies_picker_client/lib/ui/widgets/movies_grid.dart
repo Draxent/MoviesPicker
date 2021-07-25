@@ -5,6 +5,7 @@ import '../../data/models/movie_poster.dart';
 import '../../shared/shared.dart';
 
 import '../pages/movie_details_page.dart';
+import './poster_viewer.dart';
 
 class MoviesGridController extends StatelessWidget {
   const MoviesGridController(this.movies);
@@ -52,10 +53,7 @@ class _MovieViewer extends StatelessWidget {
           cursor: SystemMouseCursors.click,
           child: Container(
             color: Colors.black,
-            child: SizedBox(
-              width: SharedSizes.poster.width,
-              height: SharedSizes.poster.height,
-            ),
+            child: PosterViewer(movie.id, movie.poster, movie.isComingSoon),
           ),
         ),
       );

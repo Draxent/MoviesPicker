@@ -31,7 +31,10 @@ abstract class SharedWidgets {
   static const vSpace = SizedBox(height: 30);
 }
 
-abstract class SharedImages {}
+abstract class SharedImages {
+  static const imagePath = 'assets/images';
+  static const comingSoon = '$imagePath/coming_soon.png';
+}
 
 abstract class SharedColors {}
 
