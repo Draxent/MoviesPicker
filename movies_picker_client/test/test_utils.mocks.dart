@@ -2,13 +2,17 @@
 // in movies_picker_client/test/test_utils.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
 import 'package:http/http.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:movies_picker_client/data/api/movies_api.dart' as _i3;
-import 'package:movies_picker_client/data/models/language.dart' as _i5;
-import 'package:movies_picker_client/data/models/location.dart' as _i6;
+import 'package:movies_picker_client/data/api/movies_api.dart' as _i4;
+import 'package:movies_picker_client/data/models/language.dart' as _i6;
+import 'package:movies_picker_client/data/models/location.dart' as _i7;
+import 'package:movies_picker_client/data/models/movie_details.dart' as _i3;
+import 'package:movies_picker_client/data/models/movie_poster.dart' as _i8;
+import 'package:movies_picker_client/data/repositories/movies_repository.dart'
+    as _i9;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -20,25 +24,128 @@ import 'package:movies_picker_client/data/models/location.dart' as _i6;
 
 class _FakeResponse extends _i1.Fake implements _i2.Response {}
 
+class _FakeMovieDetails extends _i1.Fake implements _i3.MovieDetails {}
+
 /// A class which mocks [MoviesApi].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMoviesApi extends _i1.Mock implements _i3.MoviesApi {
+class MockMoviesApi extends _i1.Mock implements _i4.MoviesApi {
   MockMoviesApi() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Response> getMovies(
-          {String? title, _i5.Language? language, _i6.Location? location}) =>
+  _i5.Future<_i2.Response> getMovies(
+          {String? title, _i6.Language? language, _i7.Location? location}) =>
       (super.noSuchMethod(
               Invocation.method(#getMovies, [],
                   {#title: title, #language: language, #location: location}),
               returnValue: Future<_i2.Response>.value(_FakeResponse()))
-          as _i4.Future<_i2.Response>);
+          as _i5.Future<_i2.Response>);
   @override
-  _i4.Future<_i2.Response> getMovieDetails(int? movieId) =>
+  _i5.Future<_i2.Response> getMovieDetails(int? movieId) =>
       (super.noSuchMethod(Invocation.method(#getMovieDetails, [movieId]),
               returnValue: Future<_i2.Response>.value(_FakeResponse()))
-          as _i4.Future<_i2.Response>);
+          as _i5.Future<_i2.Response>);
+}
+
+/// A class which mocks [MovieDetails].
+///
+/// See the documentation for Mockito's code generation for more information.
+// ignore: must_be_immutable
+class MockMovieDetails extends _i1.Mock implements _i3.MovieDetails {
+  MockMovieDetails() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  int get id =>
+      (super.noSuchMethod(Invocation.getter(#id), returnValue: 0) as int);
+  @override
+  _i6.Language get language => (super.noSuchMethod(Invocation.getter(#language),
+      returnValue: _i6.Language.english) as _i6.Language);
+  @override
+  _i7.Location get location => (super.noSuchMethod(Invocation.getter(#location),
+      returnValue: _i7.Location.bangalore) as _i7.Location);
+  @override
+  String get plot =>
+      (super.noSuchMethod(Invocation.getter(#plot), returnValue: '') as String);
+  @override
+  String get poster =>
+      (super.noSuchMethod(Invocation.getter(#poster), returnValue: '')
+          as String);
+  @override
+  String get title =>
+      (super.noSuchMethod(Invocation.getter(#title), returnValue: '')
+          as String);
+  @override
+  String get imdbID =>
+      (super.noSuchMethod(Invocation.getter(#imdbID), returnValue: '')
+          as String);
+  @override
+  double get imdbRating =>
+      (super.noSuchMethod(Invocation.getter(#imdbRating), returnValue: 0.0)
+          as double);
+  @override
+  List<String> get soundEffects =>
+      (super.noSuchMethod(Invocation.getter(#soundEffects),
+          returnValue: <String>[]) as List<String>);
+  @override
+  List<String> get stills =>
+      (super.noSuchMethod(Invocation.getter(#stills), returnValue: <String>[])
+          as List<String>);
+  @override
+  bool get isComingSoon =>
+      (super.noSuchMethod(Invocation.getter(#isComingSoon), returnValue: false)
+          as bool);
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [MoviePoster].
+///
+/// See the documentation for Mockito's code generation for more information.
+// ignore: must_be_immutable
+class MockMoviePoster extends _i1.Mock implements _i8.MoviePoster {
+  MockMoviePoster() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  int get id =>
+      (super.noSuchMethod(Invocation.getter(#id), returnValue: 0) as int);
+  @override
+  String get poster =>
+      (super.noSuchMethod(Invocation.getter(#poster), returnValue: '')
+          as String);
+  @override
+  bool get isComingSoon =>
+      (super.noSuchMethod(Invocation.getter(#isComingSoon), returnValue: false)
+          as bool);
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [MoviesRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockMoviesRepository extends _i1.Mock implements _i9.MoviesRepository {
+  MockMoviesRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<List<_i8.MoviePoster>> getMovies(
+          {String? title, _i6.Language? language, _i7.Location? location}) =>
+      (super.noSuchMethod(
+              Invocation.method(#getMovies, [],
+                  {#title: title, #language: language, #location: location}),
+              returnValue:
+                  Future<List<_i8.MoviePoster>>.value(<_i8.MoviePoster>[]))
+          as _i5.Future<List<_i8.MoviePoster>>);
+  @override
+  _i5.Future<_i3.MovieDetails> getMovieDetails(int? movieId) =>
+      (super.noSuchMethod(Invocation.method(#getMovieDetails, [movieId]),
+              returnValue: Future<_i3.MovieDetails>.value(_FakeMovieDetails()))
+          as _i5.Future<_i3.MovieDetails>);
 }

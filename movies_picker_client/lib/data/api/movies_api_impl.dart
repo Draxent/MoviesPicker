@@ -4,7 +4,7 @@ import '../../shared/shared.dart';
 
 import '../models/language.dart';
 import '../models/location.dart';
-import '../models/movie_detail.dart';
+import '../models/movie_details.dart';
 
 import './movies_api.dart';
 
@@ -21,9 +21,9 @@ class MoviesApiImpl implements MoviesApi {
   }) =>
       http.get(
         Uri.http(SharedConsts.authorityURL, _Consts.url, {
-          if (title != null) MovieDetail.colTitle: title,
-          if (language != null) MovieDetail.colLanguage: language.display,
-          if (location != null) MovieDetail.colLocation: location.display,
+          if (title != null) MovieDetails.colTitle: title,
+          if (language != null) MovieDetails.colLanguage: language.display,
+          if (location != null) MovieDetails.colLocation: location.display,
         }),
       );
 

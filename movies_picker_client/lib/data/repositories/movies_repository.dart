@@ -1,6 +1,6 @@
 import '../models/language.dart';
 import '../models/location.dart';
-import '../models/movie_detail.dart';
+import '../models/movie_details.dart';
 import '../models/movie_poster.dart';
 
 abstract class MoviesRepository {
@@ -10,5 +10,5 @@ abstract class MoviesRepository {
     Location? location,
   });
 
-  Future<MovieDetail> getMovieDetails(int movieId);
+  Future<MovieDetails> getMovieDetails(int movieId);
 }

@@ -9,7 +9,7 @@ import '../api/movies_api_impl.dart';
 import '../models/data_error.dart';
 import '../models/language.dart';
 import '../models/location.dart';
-import '../models/movie_detail.dart';
+import '../models/movie_details.dart';
 import '../models/movie_poster.dart';
 
 import './movies_repository.dart';
@@ -49,14 +49,14 @@ class MoviesRepositoryImpl implements MoviesRepository {
           '''cannot get movies searching for title: $title, language: $language, location: $location''');
 
   @override
-  Future<MovieDetail> getMovieDetails(int movieId) async {
+  Future<MovieDetails> getMovieDetails(int movieId) async {
     final response = await _moviesApi.getMovieDetails(movieId);
     if (response.statusCode != SharedConsts.responseOk) {
       throw _cannotGetMovieDetails(movieId);
     }
     try {
       final Map<String, dynamic> movieRaw = json.decode(response.body);
-      return MovieDetail.fromResponseData(movieRaw);
+      return MovieDetails.fromResponseData(movieRaw);
     } catch (e, s) {
       logger.e('Error: $e, Stack: $s');
       throw _cannotGetMovieDetails(movieId);

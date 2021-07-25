@@ -4,8 +4,8 @@ import './language.dart';
 import './location.dart';
 
 @immutable
-class MovieDetail {
-  const MovieDetail({
+class MovieDetails {
+  const MovieDetails({
     required this.id,
     required this.language,
     required this.location,
@@ -19,8 +19,8 @@ class MovieDetail {
     required this.isComingSoon,
   });
 
-  factory MovieDetail.fromResponseData(Map<String, dynamic> data) =>
-      MovieDetail(
+  factory MovieDetails.fromResponseData(Map<String, dynamic> data) =>
+      MovieDetails(
         id: data[colId],
         language: LanguageParser.parse(data[colLanguage]),
         location: LocationParser.parse(data[colLocation]),
@@ -77,7 +77,7 @@ class MovieDetail {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MovieDetail &&
+      other is MovieDetails &&
           runtimeType == other.runtimeType &&
           id == other.id;
 
