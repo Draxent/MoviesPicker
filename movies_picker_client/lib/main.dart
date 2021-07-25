@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import './data/repositories/movies_repository_impl.dart';
 import './logic/movie_details_cubit.dart';
 import './logic/movies_cubit.dart';
+import './logic/search_criteria_provider.dart';
 import './shared/shared.dart';
 import './ui/pages/movie_details_page.dart';
 import './ui/pages/movies_page.dart';
@@ -14,18 +16,22 @@ void main() {
 
 class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (BuildContext ctx) =>
-                MoviesCubit(MoviesRepositoryImpl.instance),
-          ),
-          BlocProvider(
-            create: (BuildContext ctx) =>
-                MovieDetailsCubit(MoviesRepositoryImpl.instance),
-          ),
-        ],
-        child: _buildApp(context),
+  Widget build(BuildContext context) =>
+      ChangeNotifierProvider<SearchCriteriaProvider>(
+        create: (_) => SearchCriteriaProvider(),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (BuildContext ctx) =>
+                  MoviesCubit(MoviesRepositoryImpl.instance),
+            ),
+            BlocProvider(
+              create: (BuildContext ctx) =>
+                  MovieDetailsCubit(MoviesRepositoryImpl.instance),
+            ),
+          ],
+          child: _buildApp(context),
+        ),
       );
 
   Widget _buildApp(BuildContext context) {

@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long>, JpaSpecificationExecutor<Movie> {
     String FIND_BY_TITLE_LANGUAGE_LOCATION =
-            "SELECT x FROM Movie x WHERE x.title LIKE %:title% AND x.language IN (:languages) AND x.location IN (:locations) LIMIT 100";
+            "SELECT x FROM Movie x WHERE lower(x.title) LIKE %:title% AND x.language IN (:languages) AND x.location IN (:locations)";
 
     @Query(FIND_BY_TITLE_LANGUAGE_LOCATION)
     List<Movie> findByTitleLanguageLocation(

@@ -24,7 +24,7 @@ public class MovieController {
 			@RequestParam(value = "title", required = false) String title,
 			@RequestParam(value = "language", required = false) String language,
 			@RequestParam(value = "location", required = false) String location) {
-		String mTitle = title == null ? "" : title;
+		String mTitle = title == null ? "" : title.toLowerCase();
 		List<Language> languages = language == null ? Arrays.asList(Language.values()) :
 				Collections.singletonList(Language.parse(language));
 		List<Location> locations = location == null ? Arrays.asList(Location.values()) :

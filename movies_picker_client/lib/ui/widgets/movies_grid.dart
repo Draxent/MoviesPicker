@@ -7,17 +7,8 @@ import '../../shared/shared.dart';
 import '../pages/movie_details_page.dart';
 import './poster_viewer.dart';
 
-class MoviesGridController extends StatelessWidget {
-  const MoviesGridController(this.movies);
-
-  final List<MoviePoster> movies;
-
-  @override
-  Widget build(BuildContext context) => _MoviesGridViewer(movies);
-}
-
-class _MoviesGridViewer extends StatelessWidget {
-  const _MoviesGridViewer(this.movies);
+class MoviesGridViewer extends StatelessWidget {
+  const MoviesGridViewer(this.movies);
 
   final List<MoviePoster> movies;
 

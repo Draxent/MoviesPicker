@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../data/models/language.dart';
+import '../../data/models/location.dart';
 import '../../data/models/movie_poster.dart';
 import '../../logic/movies_cubit.dart';
+import '../../logic/search_criteria_provider.dart';
 import '../../shared/shared.dart';
 
 import '../widgets/movies_grid.dart';
@@ -14,10 +18,21 @@ class MoviesPage extends StatelessWidget {
   static const routeName = '/';
 
   @override
-  Widget build(BuildContext context) => MoviesLoader();
+  Widget build(BuildContext context) {
+    final provider = context.watch<SearchCriteriaProvider>();
+    return MoviesLoader(
+        UniqueKey(), provider.title, provider.language, provider.location);
+  }
 }
 
 class MoviesLoader extends StatefulWidget {
+  const MoviesLoader(Key key, this.title, this.language, this.location)
+      : super(key: key);
+
+  final String? title;
+  final Language? language;
+  final Location? location;
+
   @override
   _MoviesLoaderState createState() => _MoviesLoaderState();
 }
@@ -26,7 +41,11 @@ class _MoviesLoaderState extends State<MoviesLoader> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<MoviesCubit>(context).getMovies();
+    BlocProvider.of<MoviesCubit>(context).getMovies(
+      title: widget.title,
+      language: widget.language,
+      location: widget.location,
+    );
   }
 
   @override
@@ -51,13 +70,13 @@ class _MoviesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Center(
+          title: const Center(
             child: SearchBarController(),
           ),
         ),
         body: SafeArea(
           child: Center(
-            child: MoviesGridController(movies),
+            child: MoviesGridViewer(movies),
           ),
         ),
       );
