@@ -7,11 +7,14 @@ abstract class SharedConsts {
   static const appName = 'Movies Picker';
   static const responseOk = 200;
   static const responseInternalServerError = 500;
-  static const authorityURL = 'localhost:8080';
+  static const authorityURL = '127.0.0.1:8080';
   static const baseURL = '/api/v1';
 }
 
-abstract class SharedSizes {}
+abstract class SharedSizes {
+  static const poster = Size(300, 444);
+  static const posterRatio = 300 / 444;
+}
 
 abstract class SharedSymbol {
   static const emptyStr = '';

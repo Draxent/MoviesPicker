@@ -5,7 +5,7 @@ import './data/repositories/movies_repository_impl.dart';
 import './logic/movie_details_cubit.dart';
 import './logic/movies_cubit.dart';
 import './shared/shared.dart';
-import './ui/pages/movie_detail_page.dart';
+import './ui/pages/movie_details_page.dart';
 import './ui/pages/movies_page.dart';
 
 void main() {
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       title: SharedConsts.appName,
       routes: {
         MoviesPage.routeName: (BuildContext _) => MoviesPage(),
-        MovieDetailPage.routeName: (BuildContext _) => MovieDetailPage(),
+        MovieDetailsPage.routeName: (BuildContext _) => MovieDetailsPage(),
       },
       theme: ThemeData(
         primaryColor: const Color(0xFF421c45),

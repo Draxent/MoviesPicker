@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MovieDetailPage extends StatelessWidget {
+class MovieDetailsPage extends StatelessWidget {
   static const routeName = '/movie';
 
   @override
