@@ -38,7 +38,7 @@ class _MovieViewer extends StatelessWidget {
   Widget build(BuildContext context) => GestureDetector(
         onTap: () => Navigator.of(context).pushNamed(
           MovieDetailsPage.routeName,
-          arguments: movie,
+          arguments: movie.id,
         ),
         child: MouseRegion(
           cursor: SystemMouseCursors.click,

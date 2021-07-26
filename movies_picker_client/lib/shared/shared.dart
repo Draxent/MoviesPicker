@@ -14,6 +14,7 @@ abstract class SharedConsts {
 abstract class SharedSizes {
   static const poster = Size(300, 444);
   static const posterRatio = 300 / 444;
+  static const stills = Size(150, 150);
 }
 
 abstract class SharedSymbol {
